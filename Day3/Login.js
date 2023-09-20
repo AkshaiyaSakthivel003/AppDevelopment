@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { findUserByUsernameAndPassword } from './data'; 
+import { findUser } from './data'; 
 import { addUser } from './data'; 
 import './Login.css';
 
@@ -15,8 +15,7 @@ const Login = () => {
       setLoginError('Enter Valid Username or Password');
       return;
     }
-
-     const user = findUserByUsernameAndPassword(username, password);
+    const user = findUser(username, password);
     if (user) {
       setIsLoggedIn(true);
       setLoginError('');
@@ -42,7 +41,8 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="login-container">
+    <div>
       {isLoggedIn ? (
         <div>
           <h1>Welcome</h1>
@@ -52,8 +52,10 @@ const Login = () => {
         </div>
       ) : (
         <div>
-          <h1>LOGIN</h1>
           {loginError && <p className="error">{loginError}</p>}
+          <form onSubmit={(e)=> e.preventDefault() } className="login-form">
+
+          <h1>LOGIN</h1>
           <input
             type="text"
             placeholder="Username"
@@ -66,11 +68,16 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <button onClick={handleLogin}>LOGIN</button>
           <div>{handleValidation}</div> 
-          <Link className="link1" to="/reg"><p>New User? Register Now</p></Link>
+          <p>New User? 
+          <Link className="link1" to="/reg"> Register Now</Link>
+          </p>
+          </form>
         </div>
       )}
+    </div>
     </div>
   );
 };
