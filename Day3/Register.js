@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Register.css';
 import validator from 'validator';
 import { addUser } from './data'; 
+import './Register.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  
   const nav = useNavigate();
 
   const handleRegister = () => {
@@ -32,8 +33,10 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
+    <div className="reg-container">
       <div>
+      <form className="reg-form">
+      
         <h1>REGISTER</h1>
         <input
           type="email"
@@ -60,9 +63,10 @@ const Register = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button onClick={handleRegister}>SIGN UP</button>
-        <Link className="link1" to="/">
-          <p>Already A User? Login</p>
-        </Link>
+          <p>Already A User ? 
+          <Link className="link1" to="/"> Login</Link>
+          </p>
+      </form>
       </div>
     </div>
   );
